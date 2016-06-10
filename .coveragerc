@@ -1,0 +1,3 @@
+[run]
+source = web_site
+omit = web_site/test*

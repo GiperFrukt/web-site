@@ -1,0 +1,5 @@
+      [paste.app_factory]
+      main = web_site:main
+      [console_scripts]
+      initialize_web-site_db = web_site.scripts.initializedb:main
+      
