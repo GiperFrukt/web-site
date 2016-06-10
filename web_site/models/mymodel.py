@@ -38,7 +38,8 @@ class Albums(Base):
 class Songs(Base):
     __tablename__ = 'songs'
     id = Column(Integer, primary_key=True)
-    name = Column(String(100), unique=True, nullable=False) # название
+    #name = Column(String(100), unique=True, nullable=False) # название
+    name = Column(String(100), nullable=False) # название
     albumId = Column(Integer, ForeignKey("albums.id"), nullable = False)
     directPath = Column(UnicodeText(200)) # путь до песни
 

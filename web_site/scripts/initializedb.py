@@ -23,13 +23,34 @@ def usage(argv):
           '(example: "%s development.ini")' % (cmd, cmd))
     sys.exit(1)
 
-def fillAlbums():
+def fillAlbums(dbsession):
     from ..models.mymodel import Albums
+    from datetime import date
+    currentDirectory = os.getcwd();  # абсолютный путь текущей директории
+    dPath = '\web_site\static\Musics\\'
+    fullPath = currentDirectory + dPath  # абсолютный путь до папки с музыкой
+    dirList = os.listdir(path=fullPath)  # список альбомов в папке с музыкой
+    for dir in dirList:
+        directPath = fullPath.replace(currentDirectory, "")  # относительный путь до альбома
 
-def fillSongs():
+        dbsession.add(Albums(name=dir[7:], releaseDate=date(int(dir[0:4]), 1, 1), description="Запилить файлик с описанием", picturePath=directPath+dir+"\\Cover\\picture.jpg"))
+
+def fillSongs(dbsession, engine):
     from ..models.mymodel import Songs
+    from ..models.mymodel import Albums
+    currentDirectory = os.getcwd(); # абсолютный путь текущей директории
+    dPath = '\web_site\static\Musics\\'
+    fullPath = currentDirectory + dPath # абсолютный путь до папки с музыкой
+    dirList = os.listdir(path=fullPath) # список альбомов в папке с музыкой
+    for dir in dirList:
+        albumId = dbsession.query(Albums.id).filter(Albums.name == dir[7:]).first() # поиск id альбома в бд по имени альбома
+        songsNames = os.listdir(path=fullPath+dir)
+        for c in songsNames:
+            if (c.find(".mp3")!=-1):
+                directPath = fullPath.replace(currentDirectory, "")  # относительный путь до песни
+                dbsession.add(Songs(name=c, albumId=albumId[0], directPath=directPath+dir+"\\"+c))
 
-def fillArtists():
+def fillArtists(dbsession):
     from ..models.mymodel import Artists
 
 def fillUsers(dbsession):
@@ -40,10 +61,10 @@ def fillUsers(dbsession):
     list.append(Users(login='user', password='user', age=date(1997, 6, 5), aboutYourself='Я подопытный'))
     dbsession.add_all(list)
 
-def fillPictures():
+def fillPictures(dbsession):
     from ..models.mymodel import Pictures
 
-def fillVideos():
+def fillVideos(dbsession):
     from ..models.mymodel import Videos
 
 def main(argv=sys.argv):
@@ -62,6 +83,6 @@ def main(argv=sys.argv):
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
 
+        fillAlbums(dbsession)
+        fillSongs(dbsession, engine)
         fillUsers(dbsession)
-        model = MyModel(name='one', value=1)
-        dbsession.add(model)
