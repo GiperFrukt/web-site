@@ -32,14 +32,15 @@ class MyMiddleWare(object):
 def app(environ, start_response):
     res = environ['PATH_INFO']
     path = "." + res
+    currentDirectory = "web_site/templates/";
     if not os.path.isfile(path):
-        path = './test2.html'
+        path = 'Till_Lindemann.html'
     print('...path: ', path)
-    file = open(path, 'rb')
+    file = open(currentDirectory+path, 'rb')
     fileContent = file.read()
     file.close()
     start_response('200 OK', [('Content-Type', 'text/html')])
-    return [fileContent.encode()]
+    return [fileContent]
 
 
 
@@ -54,10 +55,12 @@ def main(global_config, **settings):
     config.add_mako_renderer('.shtml')
     config.include('.routes')
     config.add_route('about', '/about')
+    config.add_route('artists1', '/Till_Lindemann')
+    config.add_view(app, route_name='artists1')
     config.add_route('profile', '/profile')
     config.add_route('test2', '/test2')
     config.add_route('home', '/')
-    config.add_route('artists1', '/Till_Lindemann')
+
     config.add_route('artists2', '/Christian_Lorenz')
     config.add_route('artists3', '/Christoph_Doom_Schneider')
     config.add_route('artists4', '/Oliver_Riedel')

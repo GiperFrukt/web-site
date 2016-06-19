@@ -4,7 +4,7 @@ import os
 
 #@view_config(route_name='about', renderer='../templates/about.jinja2')
 @view_config(route_name='about', renderer='../templates/about.html')
-@view_config(route_name='artists1', renderer='../templates/Till_Lindemann.html')
+#@view_config(route_name='artists1', renderer='../templates/Till_Lindemann.html')
 @view_config(route_name='artists2', renderer='../templates/Christian_Lorenz.html')
 @view_config(route_name='artists3', renderer='../templates/Christoph_Doom_Schneider.html')
 @view_config(route_name='artists4', renderer='../templates/Oliver_Riedel.html')
