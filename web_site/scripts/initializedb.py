@@ -9,7 +9,6 @@ from pyramid.paster import (
 
 from pyramid.scripts.common import parse_vars
 
-from ..models.meta import Base
 from ..models import (
     get_engine,
     get_session_factory,
@@ -23,6 +22,9 @@ def usage(argv):
           '(example: "%s development.ini")' % (cmd, cmd))
     sys.exit(1)
 
+'''
+Заполнение таблицы с альбомами
+'''
 def fillAlbums(dbsession):
     from ..models.mymodel import Albums
     from datetime import date
@@ -35,6 +37,9 @@ def fillAlbums(dbsession):
 
         dbsession.add(Albums(name=dir[7:], releaseDate=date(int(dir[0:4]), 1, 1), description="Запилить файлик с описанием", picturePath=directPath+dir+"\\Cover\\picture.jpg"))
 
+'''
+Заполнение таблицы с песнями
+'''
 def fillSongs(dbsession, engine):
     from ..models.mymodel import Songs
     from ..models.mymodel import Albums
@@ -50,9 +55,15 @@ def fillSongs(dbsession, engine):
                 directPath = fullPath.replace(currentDirectory, "")  # относительный путь до песни
                 dbsession.add(Songs(name=c, albumId=albumId[0], directPath=directPath+dir+"\\"+c))
 
+'''
+Заполнение таблицы с атистами
+'''
 def fillArtists(dbsession):
     from ..models.mymodel import Artists
 
+'''
+Заполнение таблицы с пользовтелями
+'''
 def fillUsers(dbsession):
     from ..models.mymodel import Users
     from datetime import date
@@ -61,9 +72,15 @@ def fillUsers(dbsession):
     list.append(Users(login='user', password='user', age=date(1997, 6, 5), aboutYourself='Я подопытный'))
     dbsession.add_all(list)
 
+'''
+Заполнение таблицы с картинками
+'''
 def fillPictures(dbsession):
     from ..models.mymodel import Pictures
 
+'''
+Заполнение таблицы с видео
+'''
 def fillVideos(dbsession):
     from ..models.mymodel import Videos
 
