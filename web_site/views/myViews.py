@@ -24,7 +24,7 @@ def my_view_about(request):
     return Response(result)
 
 
-
+@view_config(route_name='test3', renderer='../templates/test3.jinja2')
 @view_config(route_name='profile', renderer='templates/profile.jinja2')
 @view_config(route_name='home', renderer='../templates/home.jinja2')
 def view_about(request):

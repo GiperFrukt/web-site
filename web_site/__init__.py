@@ -27,18 +27,30 @@ class MyMiddleWare(object):
             return [beforeBody.encode() + bodycontent.encode() + htmlend.encode()]
         else: return [MIDDLEWARE_TOP + response.encode() + MIDDLEWARE_BOTTOM]
 
-
+import codecs
 @wsgiapp
 def app(environ, start_response):
     res = environ['PATH_INFO']
-    path = "." + res
+    path = "." + res+".html"
     currentDirectory = "web_site/templates/";
-    if not os.path.isfile(path):
-        path = 'Till_Lindemann.html'
-    print('...path: ', path)
+    #if not os.path.isfile(path):
+        #path = 'about.html' # добавить страничку 404. НИНАЙДЕНА!!!11!!
+    #print('...path: ', path)
     file = open(currentDirectory+path, 'rb')
     fileContent = file.read()
-    file.close()
+    #file.close()
+    #file = open(fileContent, 'r')
+    #file = open(fileContent, 'r')
+    #if fileContent.find('<body>') == True:
+        # разделяем документ на кусок до <Body> и после
+        #beforeBody, remainder = fileContent.split('<body>')
+        # оставшуюся часть делим на тело файла и концовку
+        #body, htmlend = remainder.split('</body>')
+        # в тело документа вставляем мидлваровский код
+        #bodycontent = '<body>' + MIDDLEWARE_TOP + body + MIDDLEWARE_BOTTOM + '</body>'
+        #page = beforeBody + bodycontent + htmlend;
+        #start_response('200 OK', [('Content-Type', 'text/html')])
+        #return [page.encode()]
     start_response('200 OK', [('Content-Type', 'text/html')])
     return [fileContent]
 
@@ -59,6 +71,7 @@ def main(global_config, **settings):
     config.add_view(app, route_name='artists1')
     config.add_route('profile', '/profile')
     config.add_route('test2', '/test2')
+    config.add_route('test3', '/test3   ')
     config.add_route('home', '/')
 
     config.add_route('artists2', '/Christian_Lorenz')
