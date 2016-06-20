@@ -66,19 +66,11 @@ def main(global_config, **settings):
     config.add_mako_renderer('.html')
     config.add_mako_renderer('.shtml')
     config.include('.routes')
-    config.add_route('about', '/about')
-    config.add_route('artists1', '/Till_Lindemann')
-    config.add_view(app, route_name='artists1')
-    config.add_route('profile', '/profile')
-    config.add_route('test2', '/test2')
-    config.add_route('test3', '/test3   ')
-    config.add_route('home', '/')
 
-    config.add_route('artists2', '/Christian_Lorenz')
-    config.add_route('artists3', '/Christoph_Doom_Schneider')
-    config.add_route('artists4', '/Oliver_Riedel')
-    config.add_route('artists5', '/Paul_Landers')
-    config.add_route('artists6', '/Richard_Kruspe-Bernstein')
+    #config.add_view(app, route_name='artists1')
+
+
+
 
 
     config.scan()

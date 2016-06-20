@@ -1,0 +1,15 @@
+{% extends "templates/maLayout.jinja2" %}
+
+{% block content %}
+    <article class="history" font="lightblue">
+        {% for row in rows %}
+            <h1> {{ row[0] }}</h1>
+            {% set N = row[1][1:] %}
+            {{ N }}
+            <p></p>
+            <audio controls>
+                <source src= "{{ N }}"  type="audio/mpeg">
+            </audio>
+        {% endfor %}
+    </article>
+{% endblock content %}

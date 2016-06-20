@@ -44,6 +44,7 @@ def fillSongs(dbsession, engine):
     from ..models.mymodel import Songs
     from ..models.mymodel import Albums
     currentDirectory = os.getcwd(); # абсолютный путь текущей директории
+    path = '\static\Musics\\'
     dPath = '\web_site\static\Musics\\'
     fullPath = currentDirectory + dPath # абсолютный путь до папки с музыкой
     dirList = os.listdir(path=fullPath) # список альбомов в папке с музыкой
@@ -52,7 +53,8 @@ def fillSongs(dbsession, engine):
         songsNames = os.listdir(path=fullPath+dir)
         for c in songsNames:
             if (c.find(".mp3")!=-1):
-                directPath = fullPath.replace(currentDirectory, "")  # относительный путь до песни
+                #directPath = fullPath.replace(currentDirectory, "")  # относительный путь до песни
+                directPath = path
                 dbsession.add(Songs(name=c, albumId=albumId[0], directPath=directPath+dir+"\\"+c))
 
 '''
