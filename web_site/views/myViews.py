@@ -41,7 +41,23 @@ def my_view(request):
     #nxt = request.params.get('next') or request.route_url('profile')
     nxt = ""
     did_fail = False
-    if 'login' in request.POST:
+    auth = False
+    # если getceurretuser()возвращает юзера то запускаем forget, иначе иф снизу
+    isAuth = get_current_user(request)
+    print("LSAMDSAMKDS")
+    print(isAuth)
+    print(request.POST)
+    if isAuth:
+        print ("qeuib;sdkjnfs")
+        headers = forget(request)
+        return {
+            'login': "",
+            'next': nxt,
+            'failed_attempt': did_fail,
+            'auth' : auth,
+        }
+        return HTTPFound(location=nxt, headers=headers)
+    elif 'login' in request.POST: # если жмакали на кнопку
         user = login(
             request.POST["login"], request.POST["password"]
         )
@@ -51,9 +67,16 @@ def my_view(request):
             print(user)
         else:
             nxt = False'''
-
+        print("12331212fsdfsd")
         if user:
             headers = remember(request, user.id)
+            auth = True
+            return {
+                'login': "",
+                'next': nxt,
+                'failed_attempt': did_fail,
+                'auth': auth,
+            }
             return HTTPFound(location=nxt, headers=headers)
         else:
             did_fail = True
@@ -61,4 +84,13 @@ def my_view(request):
         'login': "",
         'next': nxt,
         'failed_attempt': did_fail,
+        'auth': auth,
     }
+
+
+
+def get_current_user(request):
+    id_ = authenticated_userid(request)
+    print("in views ", id_)
+    user = getUser(id_, request)
+    return user
