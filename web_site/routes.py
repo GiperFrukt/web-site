@@ -2,6 +2,7 @@ def includeme(config):
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
     config.add_route('about', '/about')
+    config.add_route('authorization', '/authorization')
     config.add_route('test2', '/test2')
     config.add_route('test3', '/test3')
     config.add_route('artists1', '/Till_Lindemann')
@@ -12,4 +13,8 @@ def includeme(config):
     config.add_route('artists6', '/Richard_Kruspe-Bernstein')
     config.add_route('Herzeleid', '/Herzeleid')
     config.add_route('Sehnsucht', '/Sehnsucht')
+    config.add_route('Rosenrot', '/Rosenrot')
+    config.add_route('LiebeIstFuerAlleDa', '/LiebeIstFuerAlleDa')
+    config.add_route('Mutter', '/Mutter')
+    config.add_route('ReiseReise', '/ReiseReise')
 

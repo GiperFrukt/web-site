@@ -1,4 +1,4 @@
-from pyramid.response import Response
+'''from pyramid.response import Response
 from pyramid.view import view_config
 
 from sqlalchemy.exc import DBAPIError
@@ -13,10 +13,10 @@ def my_view(request):
         one = query.filter(MyModel.name == 'one').first()
     except DBAPIError:
         return Response(db_err_msg, content_type='text/plain', status=500)
-    return {'one': one, 'project': 'web-site'}
+    return {'one': one, 'project': 'web-site'}'''
 
 
-db_err_msg = """\
+'''db_err_msg =
 Pyramid is having a problem using your SQL database.  The problem
 might be caused by one of the following things:
 
@@ -29,5 +29,5 @@ might be caused by one of the following things:
     your "development.ini" file is running.
 
 After you fix the problem, please restart the Pyramid application to
-try it again.
-"""
+try it again.'''
+

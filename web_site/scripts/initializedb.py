@@ -29,13 +29,15 @@ def fillAlbums(dbsession):
     from ..models.mymodel import Albums
     from datetime import date
     currentDirectory = os.getcwd();  # абсолютный путь текущей директории
+    path = '\static\Musics\\'
     dPath = '\web_site\static\Musics\\'
     fullPath = currentDirectory + dPath  # абсолютный путь до папки с музыкой
     dirList = os.listdir(path=fullPath)  # список альбомов в папке с музыкой
     for dir in dirList:
-        directPath = fullPath.replace(currentDirectory, "")  # относительный путь до альбома
-
-        dbsession.add(Albums(name=dir[7:], releaseDate=date(int(dir[0:4]), 1, 1), description="Запилить файлик с описанием", picturePath=directPath+dir+"\\Cover\\picture.jpg"))
+        #directPath = fullPath.replace(currentDirectory, "")  # относительный путь до альбома
+        directPath = path
+        #int(dir[0:4])
+        dbsession.add(Albums(name=dir, releaseDate=date(2000, 1, 1), description="Запилить файлик с описанием", picturePath=directPath+dir+"\\Cover\\picture.jpg"))
 
 '''
 Заполнение таблицы с песнями
@@ -49,7 +51,7 @@ def fillSongs(dbsession, engine):
     fullPath = currentDirectory + dPath # абсолютный путь до папки с музыкой
     dirList = os.listdir(path=fullPath) # список альбомов в папке с музыкой
     for dir in dirList:
-        albumId = dbsession.query(Albums.id).filter(Albums.name == dir[7:]).first() # поиск id альбома в бд по имени альбома
+        albumId = dbsession.query(Albums.id).filter(Albums.name == dir).first() # поиск id альбома в бд по имени альбома
         songsNames = os.listdir(path=fullPath+dir)
         for c in songsNames:
             if (c.find(".mp3")!=-1):

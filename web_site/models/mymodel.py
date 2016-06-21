@@ -54,12 +54,3 @@ class Videos(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), unique=True, nullable=False) # название
     directPath = Column(UnicodeText(200)) # путь до фото
-
-class MyModel(Base):
-    __tablename__ = 'models'
-    id = Column(Integer, primary_key=True)
-    name = Column(UnicodeText)
-    value = Column(Integer)
-
-
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
