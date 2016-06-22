@@ -1,0 +1,18 @@
+{% extends "templates/maLayout.jinja2" %}
+
+{% block content %}
+    <article class="history" font="lightblue">
+        <img src={{ photo }} height=500>
+        {% for row in rows %}
+            <h1> {{ row[0] }}</h1>
+            {% set N = row[1][1:] %}
+
+            <form action={{ came_from }} method="post">
+                <audio controls>
+                    <source src="{{ N }}" type="audio/mpeg">
+                </audio>
+            </form>
+            <p></p>
+        {% endfor %}
+    </article>
+{% endblock content %}

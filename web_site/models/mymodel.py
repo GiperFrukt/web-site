@@ -54,3 +54,9 @@ class Videos(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), unique=True, nullable=False) # название
     directPath = Column(UnicodeText(200)) # путь до фото
+
+class Favorites(Base):
+    __tablename__ = 'favorites'
+    id = Column(Integer, primary_key=True)
+    username = Column(Integer, ForeignKey("users.id"), nullable=False)
+    songId = Column(Integer, ForeignKey("songs.id"), nullable=False)  # название

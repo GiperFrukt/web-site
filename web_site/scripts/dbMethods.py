@@ -21,12 +21,47 @@ engine = create_engine('sqlite:///web-site.sqlite')
 Base.metadata.bind = engine
 #Base.metadata.create_all(engine)
 
+from sqlalchemy import insert
+
+def addSongFavorite(userid, song):
+    with transaction.manager:
+        insert_data = insert(Favorites).values(username=userid, songId = song)
+        con = engine.connect()
+        try:
+            res = con.execute(insert_data)
+            print(res)
+        except:
+            return False
+    return True
+
+def getFavoritesSong(name):
+    session_factory = get_session_factory(engine)
+    with transaction.manager:
+        dbsession = get_tm_session(session_factory, transaction.manager)
+        print("AAAAAAAAAAAAAAAAAAAAAA")
+        print(name)
+        songs = dbsession.query(Favorites.songId).filter(Favorites.username == name).all()
+        print("fsdfsfasdgasgaehtdtkyky")
+        print(songs)
+        songlist = []
+        for song in songs:
+            songlist.append(dbsession.query(Songs.name, Songs.directPath, Songs.id).filter(Songs.id == song[0]).all())
+        print("JKSKBJDVJHSJBJSLBSBSK")
+        print (songlist)
+        test = []
+        for s in songlist:
+            test.append(s[0])
+        print(test)
+        #print(songs[0].directPath)
+    return test
+
 def getSongs(name):
     session_factory = get_session_factory(engine)
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
         albumId = dbsession.query(Albums.id).filter(Albums.name == name).first()[0]
         songs = dbsession.query(Songs.name, Songs.directPath, Songs.id).filter(Songs.albumId == albumId).all()  # поиск id альбома в бд по имени альбома
+        print(songs)
         #print(songs[0].directPath)
     return songs
 

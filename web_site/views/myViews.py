@@ -14,11 +14,13 @@ from ..scripts.dbMethods import *
 def almub_view(request):
     print(request)
     username = request.authenticated_userid
-    print("azaza")
     res = str(request).split('\n')[0].split(' ')[1]
     res1 = res[1:]
     picture = getAlbum(res[1:])
     songpaths = getSongs(res[1:]) # название альбома без слэш
+    added = 0
+    if 'addFavorite' in request.POST:
+        added = addSongFavorite(username, request.POST["addFavorite"])
     hideIt = "hidden"
     if username:
         human = username
@@ -28,6 +30,28 @@ def almub_view(request):
     return {"rows": songpaths,
             'came_from': res1,
             'photo': picture,
+            'human': human,
+            'hideIt': hideIt,
+            }
+
+
+@view_config(route_name='favorites', renderer='../templates/FavoriteVizualization.jinja2')
+def favorite_view(request):
+    print(request)
+    username = request.authenticated_userid
+    res = str(request).split('\n')[0].split(' ')[1]
+    res1 = res[1:]
+
+    hideIt = "hidden"
+    if username:
+        songpaths = getFavoritesSong(username)  # название альбома без слэш
+        human = username
+        hideIt = "visible"
+    else:
+        human = "Гость"
+    return {"rows": songpaths,
+            'came_from': res1,
+            'photo': "",
             'human': human,
             'hideIt': hideIt,
             }

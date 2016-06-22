@@ -17,6 +17,7 @@ def includeme(config):
     config.add_route('LiebeIstFuerAlleDa', '/LiebeIstFuerAlleDa')
     config.add_route('Mutter', '/Mutter')
     config.add_route('ReiseReise', '/ReiseReise')
+    config.add_route('favorites', '/favorites')
     #config.add_route('login1', '/login')
     #config.add_route('logout', '/logout')
     config.add_route('login1', '/login')
