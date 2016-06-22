@@ -4,7 +4,7 @@ def includeme(config):
     config.add_route('about', '/about')
     config.add_route('authorization', '/authorization')
     config.add_route('test2', '/test2')
-    config.add_route('test3', '/test3')
+    config.add_route('contacts', '/contacts')
     config.add_route('Till_Lindemann', '/Till_Lindemann')
     config.add_route('Christian_Lorenz', '/Christian_Lorenz')
     config.add_route('Christoph_Doom_Schneider', '/Christoph_Doom_Schneider')

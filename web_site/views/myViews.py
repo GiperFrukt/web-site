@@ -12,14 +12,23 @@ from ..scripts.dbMethods import *
 @view_config(route_name='Sehnsucht', renderer='../templates/AlbumsVizualization.jinja2')
 @view_config(route_name='Rosenrot', renderer='../templates/AlbumsVizualization.jinja2')
 def almub_view(request):
+    username = request.authenticated_userid
     print("azaza")
     res = str(request).split('\n')[0].split(' ')[1]
     res1 = res[1:]
     picture = getAlbum(res[1:])
     songpaths = getSongs(res[1:]) # название альбома без слэш
+    hideIt = "hidden"
+    if username:
+        human = username
+        hideIt = "visible"
+    else:
+        human = "Гость"
     return {"rows": songpaths,
             'came_from': res1,
             'photo': picture,
+            'human': human,
+            'hideIt': hideIt,
             }
 
 @view_config(route_name='Christian_Lorenz', renderer='../templates/Christian_Lorenz.jinja2')
@@ -30,18 +39,22 @@ def almub_view(request):
 @view_config(route_name='Paul_Landers', renderer='../templates/Paul_Landers.jinja2')
 @view_config(route_name='Richard_Kruspe-Bernstein', renderer='../templates/Richard_Kruspe-Bernstein.jinja2')
 @view_config(route_name='test2', renderer='../templates/test2.shtml')
-@view_config(route_name='test3', renderer='../templates/test3.jinja2')
+@view_config(route_name='contacts', renderer='../templates/contacts.jinja2')
 @view_config(route_name='home', renderer='../templates/home.jinja2')
 def view_about(request):
     username = request.authenticated_userid
     #file = open(os.getcwd(), 'r')
     res = str(request).split('\n')[0].split(' ')[1]
     res1 = res[1:]
+    hideIt = "hidden"
     if username:
         human = username
+        hideIt = "visible"
     else: human = "Гость"
     return {'came_from': res1,
-            'human':human}
+            'human':human,
+            'hideIt': hideIt,
+            }
 
 
 
