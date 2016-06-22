@@ -30,6 +30,12 @@ def getSongs(name):
         #print(songs[0].directPath)
     return songs
 
+def getAlbum(name):
+    session_factory = get_session_factory(engine)
+    with transaction.manager:
+        dbsession = get_tm_session(session_factory, transaction.manager)
+        albumId = dbsession.query(Albums.picturePath).filter(Albums.name == name).first()[0]
+    return albumId
 
 def getUser(id_, request):
     #request for autorization, don't delete
@@ -49,7 +55,6 @@ from sqlalchemy.orm.exc import NoResultFound
 
 def login(login, password):
     session_factory = get_session_factory(engine)
-    #session = get_db_session()
     dbsession = get_tm_session(session_factory, transaction.manager);
     query = dbsession.query(Users).filter(Users.login == login and Users.password == password)
     try:

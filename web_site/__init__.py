@@ -18,20 +18,11 @@ class HelloFactory(object):
 from pyramid.security import Allow, forget, remember
 
 def main(global_config, **settings):
-    """ This function returns a Pyramid WSGI application.
-    """
-    '''config = Configurator(settings=settings)
-
-    authn_policy = AuthTktAuthenticationPolicy(
-        'sosecret', callback=getUser, hashalg='sha512')
-    authz_policy = ACLAuthorizationPolicy()
-    config.set_authentication_policy(authn_policy)
-    config.set_authorization_policy(authz_policy)'''
-
     authn_policy = AuthTktAuthenticationPolicy('seekrit', hashalg='sha512')
     authz_policy = ACLAuthorizationPolicy()
 
-    config = Configurator(root_factory=HelloFactory)
+    #config = Configurator(root_factory=HelloFactory)
+    config = Configurator(settings=settings)
     config.set_authentication_policy(authn_policy)
     config.set_authorization_policy(authz_policy)
 
@@ -44,5 +35,4 @@ def main(global_config, **settings):
 
     config.scan()
     pyramid_app = config.make_wsgi_app()
-    #answer = MyMiddleWare(pyramid_app)
     return pyramid_app

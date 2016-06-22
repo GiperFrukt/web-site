@@ -15,9 +15,11 @@ def almub_view(request):
     print("azaza")
     res = str(request).split('\n')[0].split(' ')[1]
     res1 = res[1:]
+    picture = getAlbum(res[1:])
     songpaths = getSongs(res[1:]) # название альбома без слэш
     return {"rows": songpaths,
             'came_from': res1,
+            'photo': picture,
             }
 
 @view_config(route_name='Christian_Lorenz', renderer='../templates/Christian_Lorenz.jinja2')
@@ -46,58 +48,6 @@ def view_about(request):
 from pyramid.security import remember, authenticated_userid, forget
 from pyramid.httpexceptions import HTTPFound, HTTPForbidden
 
-#@view_config(route_name='authorization', renderer='templates/authorization.jinja2')
-def my_view(request):
-    print("azaza")
-    #nxt = request.params.get('next') or request.route_url('profile')
-    nxt = ""
-    did_fail = False
-    auth = False
-    # если getceurretuser()возвращает юзера то запускаем forget, иначе иф снизу
-    isAuth = get_current_user(request)
-    print("LSAMDSAMKDS")
-    print(isAuth)
-    print(request.POST)
-    if isAuth:
-        print ("qeuib;sdkjnfs")
-        headers = forget(request)
-        return {
-            'login': "",
-            'next': nxt,
-            'failed_attempt': did_fail,
-            'auth' : auth,
-        }
-        return HTTPFound(location=nxt, headers=headers)
-    elif 'login' in request.POST: # если жмакали на кнопку
-        user = login(
-            request.POST["login"], request.POST["password"]
-        )
-
-        '''if user:
-            nxt = True
-            print(user)
-        else:
-            nxt = False'''
-        print("12331212fsdfsd")
-        if user:
-            headers = remember(request, user.id)
-            auth = True
-            return {
-                'login': "",
-                'next': nxt,
-                'failed_attempt': did_fail,
-                'auth': auth,
-            }
-            return HTTPFound(location=nxt, headers=headers)
-        else:
-            did_fail = True
-    return {
-        'login': "",
-        'next': nxt,
-        'failed_attempt': did_fail,
-        'auth': auth,
-    }
-
 @view_config(route_name='login1', renderer='../templates/authorization.jinja2')
 @view_config(route_name='logout', renderer='../templates/authorization.jinja2')
 @view_config(route_name='authorization', renderer='../templates/authorization.jinja2')
@@ -123,7 +73,7 @@ def test(request):
         return HTTPFound(location=request.route_url('about', name='log out!!!'),
                          headers=headers)
 
-    return {}
+    return HTTPFound(location=request.route_url(request.POST["came_from"]))
 
 def get_current_user(request):
     id_ = authenticated_userid(request)

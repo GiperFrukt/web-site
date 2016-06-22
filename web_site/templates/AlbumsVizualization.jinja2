@@ -2,11 +2,12 @@
 
 {% block content %}
     <article class="history" font="lightblue">
+        <img src={{ photo }} height=500>
         {% for row in rows %}
             <h1> {{ row[0] }}</h1>
             {% set N = row[1][1:] %}
             <audio controls>
-                <source src= "{{ N }}"  type="audio/mpeg">
+                <source src="{{ N }}" type="audio/mpeg">
             </audio>
             <p></p>
         {% endfor %}
