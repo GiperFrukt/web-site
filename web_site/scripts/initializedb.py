@@ -59,11 +59,6 @@ def fillSongs(dbsession, engine):
                 directPath = path
                 dbsession.add(Songs(name=c, albumId=albumId[0], directPath=directPath+dir+"\\"+c))
 
-'''
-Заполнение таблицы с атистами
-'''
-def fillArtists(dbsession):
-    from ..models.mymodel import Artists
 
 '''
 Заполнение таблицы с пользовтелями

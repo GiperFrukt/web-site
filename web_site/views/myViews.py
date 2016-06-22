@@ -1,9 +1,7 @@
-from pyramid.response import Response
 from pyramid.view import view_config
-import os
-
 from ..scripts.dbMethods import *
-#@view_config(route_name='about', renderer='../templates/about.jinja2')
+from pyramid.security import remember, authenticated_userid, forget
+from pyramid.httpexceptions import HTTPFound
 
 @view_config(route_name='LiebeIstFuerAlleDa', renderer='../templates/AlbumsVizualization.jinja2')
 @view_config(route_name='Mutter', renderer='../templates/AlbumsVizualization.jinja2')
@@ -57,6 +55,7 @@ def favorite_view(request):
             'hideIt': hideIt,
             }
 
+
 @view_config(route_name='Christian_Lorenz', renderer='../templates/Christian_Lorenz.jinja2')
 @view_config(route_name='about', renderer='../templates/about.jinja2')
 @view_config(route_name='Till_Lindemann', renderer='../templates/Till_Lindemann.jinja2')
@@ -64,9 +63,8 @@ def favorite_view(request):
 @view_config(route_name='Oliver_Riedel', renderer='../templates/Oliver_Riedel.jinja2')
 @view_config(route_name='Paul_Landers', renderer='../templates/Paul_Landers.jinja2')
 @view_config(route_name='Richard_Kruspe-Bernstein', renderer='../templates/Richard_Kruspe-Bernstein.jinja2')
-@view_config(route_name='test2', renderer='../templates/test2.shtml')
 @view_config(route_name='contacts', renderer='../templates/contacts.jinja2')
-@view_config(route_name='home', renderer='../templates/home.jinja2')
+@view_config(route_name='home', renderer='../templates/about.jinja2')
 def view_about(request):
     username = request.authenticated_userid
     #file = open(os.getcwd(), 'r')
@@ -82,10 +80,6 @@ def view_about(request):
             'hideIt': hideIt,
             }
 
-
-
-from pyramid.security import remember, authenticated_userid, forget
-from pyramid.httpexceptions import HTTPFound, HTTPForbidden
 
 @view_config(route_name='login1', renderer='../templates/authorization.jinja2')
 @view_config(route_name='logout', renderer='../templates/authorization.jinja2')
@@ -113,6 +107,7 @@ def test(request):
                          headers=headers)
 
     return HTTPFound(location=request.route_url(request.POST["came_from"]))
+
 
 def get_current_user(request):
     id_ = authenticated_userid(request)

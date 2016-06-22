@@ -5,23 +5,14 @@ from ..models import (
     get_tm_session,
     )
 from ..models.mymodel import *
-
-
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import (
-    scoped_session,
-    sessionmaker,)
 from sqlalchemy import create_engine
-from pyramid.threadlocal import get_current_request
+from sqlalchemy import insert
 
 Base = declarative_base()
-#DBSession = scoped_session(sessionmaker(), scopefunc=get_current_request)
 engine = create_engine('sqlite:///web-site.sqlite')
-#DBSession.configure(bind=engine)
 Base.metadata.bind = engine
-#Base.metadata.create_all(engine)
 
-from sqlalchemy import insert
 
 def addSongFavorite(userid, song):
     with transaction.manager:
@@ -38,21 +29,14 @@ def getFavoritesSong(name):
     session_factory = get_session_factory(engine)
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
-        print("AAAAAAAAAAAAAAAAAAAAAA")
-        print(name)
         songs = dbsession.query(Favorites.songId).filter(Favorites.username == name).all()
-        print("fsdfsfasdgasgaehtdtkyky")
-        print(songs)
         songlist = []
         for song in songs:
             songlist.append(dbsession.query(Songs.name, Songs.directPath, Songs.id).filter(Songs.id == song[0]).all())
-        print("JKSKBJDVJHSJBJSLBSBSK")
-        print (songlist)
+
         test = []
         for s in songlist:
             test.append(s[0])
-        print(test)
-        #print(songs[0].directPath)
     return test
 
 def getSongs(name):
@@ -61,8 +45,6 @@ def getSongs(name):
         dbsession = get_tm_session(session_factory, transaction.manager)
         albumId = dbsession.query(Albums.id).filter(Albums.name == name).first()[0]
         songs = dbsession.query(Songs.name, Songs.directPath, Songs.id).filter(Songs.albumId == albumId).all()  # поиск id альбома в бд по имени альбома
-        print(songs)
-        #print(songs[0].directPath)
     return songs
 
 def getAlbum(name):
@@ -73,9 +55,7 @@ def getAlbum(name):
     return albumId
 
 def getUser(id_, request):
-    #request for autorization, don't delete
     session_factory = get_session_factory(engine)
-    #session = get_db_session()
     dbsession = get_tm_session(session_factory, transaction.manager);
     if not id_:
         return {}
@@ -91,9 +71,11 @@ from sqlalchemy.orm.exc import NoResultFound
 def login(login, password):
     session_factory = get_session_factory(engine)
     dbsession = get_tm_session(session_factory, transaction.manager);
-    query = dbsession.query(Users).filter(Users.login == login and Users.password == password)
+    print(login+" " +password)
+    query = dbsession.query(Users).filter((Users.login == login) & (Users.password == password))
     try:
         u = query.one()
+        print(u.login+" "+u.password)
         return u
     except NoResultFound:
         return None

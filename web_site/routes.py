@@ -3,7 +3,6 @@ def includeme(config):
     config.add_route('home', '/')
     config.add_route('about', '/about')
     config.add_route('authorization', '/authorization')
-    config.add_route('test2', '/test2')
     config.add_route('contacts', '/contacts')
     config.add_route('Till_Lindemann', '/Till_Lindemann')
     config.add_route('Christian_Lorenz', '/Christian_Lorenz')
@@ -18,8 +17,6 @@ def includeme(config):
     config.add_route('Mutter', '/Mutter')
     config.add_route('ReiseReise', '/ReiseReise')
     config.add_route('favorites', '/favorites')
-    #config.add_route('login1', '/login')
-    #config.add_route('logout', '/logout')
     config.add_route('login1', '/login')
     config.add_route('logout', '/logout')
 
