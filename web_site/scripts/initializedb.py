@@ -67,7 +67,7 @@ def fillUsers(dbsession):
     from ..models.mymodel import Users
     from datetime import date
     list = []
-    list.append(Users(login='admin', password='admin', age=date(1995, 1, 11), aboutYourself='Я есть админ'))
+    list.append(Users(login='user2', password='user2', age=date(1995, 1, 11), aboutYourself='Я user'))
     list.append(Users(login='user', password='user', age=date(1997, 6, 5), aboutYourself='Я подопытный'))
     dbsession.add_all(list)
 
