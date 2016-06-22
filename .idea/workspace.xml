@@ -26,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="maLayout.jinja2" pinned="false" current-in-tab="false">
+      <file leaf-file-name="maLayout.jinja2" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web_site/templates/maLayout.jinja2">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="132" column="55" selection-start-line="132" selection-start-column="55" selection-end-line="132" selection-end-column="55" />
+            <state relative-caret-position="204">
+              <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -66,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="myViews.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="myViews.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web_site/views/myViews.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="37" column="68" selection-start-line="37" selection-start-column="68" selection-end-line="37" selection-end-column="68" />
+            <state relative-caret-position="867">
+              <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -81,8 +81,8 @@
       <file leaf-file-name="FavoriteVizualization.jinja2" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web_site/templates/FavoriteVizualization.jinja2">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+            <state relative-caret-position="68">
+              <caret line="4" column="55" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -101,7 +101,7 @@
       <file leaf-file-name="dbMethods.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web_site/scripts/dbMethods.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
+            <state relative-caret-position="-243">
               <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -149,13 +149,13 @@
         <option value="$PROJECT_DIR$/web_site/templates/about.jinja2" />
         <option value="$PROJECT_DIR$/web_site/templates/test3.jinja2" />
         <option value="$PROJECT_DIR$/web_site/templates/contacts.jinja2" />
-        <option value="$PROJECT_DIR$/web_site/templates/maLayout.jinja2" />
         <option value="$PROJECT_DIR$/web_site/templates/AlbumsVizualization.jinja2" />
         <option value="$PROJECT_DIR$/web_site/models/mymodel.py" />
         <option value="$PROJECT_DIR$/web_site/routes.py" />
         <option value="$PROJECT_DIR$/web_site/scripts/dbMethods.py" />
-        <option value="$PROJECT_DIR$/web_site/templates/FavoriteVizualization.jinja2" />
         <option value="$PROJECT_DIR$/web_site/views/myViews.py" />
+        <option value="$PROJECT_DIR$/web_site/templates/FavoriteVizualization.jinja2" />
+        <option value="$PROJECT_DIR$/web_site/templates/maLayout.jinja2" />
       </list>
     </option>
   </component>
@@ -894,14 +894,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web_site/templates/maLayout.jinja2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="132" column="55" selection-start-line="132" selection-start-column="55" selection-end-line="132" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web_site/templates/authorization.jinja2">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -926,9 +918,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web_site/templates/AlbumsVizualization.jinja2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web_site/scripts/dbMethods.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
+        <state relative-caret-position="-243">
           <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -938,27 +938,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web_site/templates/FavoriteVizualization.jinja2">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web_site/templates/AlbumsVizualization.jinja2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+        <state relative-caret-position="68">
+          <caret line="4" column="55" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web_site/views/myViews.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="37" column="68" selection-start-line="37" selection-start-column="68" selection-end-line="37" selection-end-column="68" />
+        <state relative-caret-position="867">
+          <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web_site/templates/maLayout.jinja2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>

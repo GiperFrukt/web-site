@@ -48,6 +48,7 @@ def favorite_view(request):
         human = username
         hideIt = "visible"
     else:
+        return HTTPFound(location=request.route_url("about"))
         human = "Гость"
     return {"rows": songpaths,
             'came_from': res1,
