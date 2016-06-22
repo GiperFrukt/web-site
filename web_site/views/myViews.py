@@ -12,6 +12,7 @@ from ..scripts.dbMethods import *
 @view_config(route_name='Sehnsucht', renderer='../templates/AlbumsVizualization.jinja2')
 @view_config(route_name='Rosenrot', renderer='../templates/AlbumsVizualization.jinja2')
 def almub_view(request):
+    print(request)
     username = request.authenticated_userid
     print("azaza")
     res = str(request).split('\n')[0].split(' ')[1]

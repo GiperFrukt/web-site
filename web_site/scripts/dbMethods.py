@@ -26,7 +26,7 @@ def getSongs(name):
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
         albumId = dbsession.query(Albums.id).filter(Albums.name == name).first()[0]
-        songs = dbsession.query(Songs.name, Songs.directPath).filter(Songs.albumId == albumId).all()  # поиск id альбома в бд по имени альбома
+        songs = dbsession.query(Songs.name, Songs.directPath, Songs.id).filter(Songs.albumId == albumId).all()  # поиск id альбома в бд по имени альбома
         #print(songs[0].directPath)
     return songs
 

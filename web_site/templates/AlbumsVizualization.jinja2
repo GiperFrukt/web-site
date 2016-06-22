@@ -6,9 +6,14 @@
         {% for row in rows %}
             <h1> {{ row[0] }}</h1>
             {% set N = row[1][1:] %}
-            <audio controls>
-                <source src="{{ N }}" type="audio/mpeg">
-            </audio>
+
+            <form action={{ came_from }} method="post">
+                <audio controls>
+                    <source src="{{ N }}" type="audio/mpeg">
+                </audio>
+                <button type="submit" name="addFavorite" value="{{ row[2] }}" class="btn btn-default">Добавить в избранное
+                </button>
+            </form>
             <p></p>
         {% endfor %}
     </article>

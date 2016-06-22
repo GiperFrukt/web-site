@@ -122,31 +122,30 @@
         </ul>
     </li>
     <li><a href="contacts">Контакты</a></li>
+    <li><a href="favorites">Избранное</a></li>
 </ul>
 
 {% block sidebar %}
     <ul class="login">
         <div id="sidebar">
-            <br>
+            <br><br>
             <h2>Здравствуй, {{ human }}</h2>
             <form action="authorization" method="post">
                 <input type="hidden" name="came_from" value="{{ came_from }}">
                 <div class="form-group">
                     <label for="login">Username</label>
                     <br>
-                    <input type="text" name="login" > <!--value="{{ login }}"-->
+                    <input type="text" name="login"> <!--value="{{ login }}"-->
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <br>
-                    <input type="password" name="password" > <!--value="{{ password }}"-->
+                    <input type="password" name="password"> <!--value="{{ password }}"-->
                 </div>
-                <div class="form-group">
-                    <button type="submit" name="form.submitted" value="LogIn" class="btn btn-default">Log In</button>
-                </div>
-                <div class="form-group">
-                    <button visibility="hideIt" type="submit" name="form.submitted" value="LogOut" class="btn btn-default">Log Out</button>
-                </div>
+                <button type="submit" name="form.submitted" value="LogIn" class="btn btn-default">Log In</button>
+
+                <button visibility="hideIt" type="submit" name="form.submitted" value="LogOut" class="btn btn-default">Log Out</button>
+
             </form>
         </div>
         <tr></tr>
