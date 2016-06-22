@@ -11,10 +11,14 @@ from ..scripts.dbMethods import *
 @view_config(route_name='Herzeleid', renderer='../templates/AlbumsVizualization.jinja2')
 @view_config(route_name='Sehnsucht', renderer='../templates/AlbumsVizualization.jinja2')
 @view_config(route_name='Rosenrot', renderer='../templates/AlbumsVizualization.jinja2')
-def test(request):
+def almub_view(request):
+    print("azaza")
     res = str(request).split('\n')[0].split(' ')[1]
+    res1 = res[1:]
     songpaths = getSongs(res[1:]) # название альбома без слэш
-    return {"rows": songpaths}
+    return {"rows": songpaths,
+            'came_from': res1,
+            }
 
 @view_config(route_name='artists2', renderer='../templates/Christian_Lorenz.jinja2')
 @view_config(route_name='about', renderer='../templates/about.jinja2')
@@ -28,14 +32,16 @@ def test(request):
 @view_config(route_name='home', renderer='../templates/home.jinja2')
 def view_about(request):
     #file = open(os.getcwd(), 'r')
-    return {'project': 'MyProject'}
+    res = str(request).split('\n')[0].split(' ')[1]
+    res1 = res[1:]
+    return {'came_from': res1}
 
 
 
 from pyramid.security import remember, authenticated_userid, forget
 from pyramid.httpexceptions import HTTPFound, HTTPForbidden
 
-@view_config(route_name='authorization', renderer='templates/authorization.jinja2')
+#@view_config(route_name='authorization', renderer='templates/authorization.jinja2')
 def my_view(request):
     print("azaza")
     #nxt = request.params.get('next') or request.route_url('profile')
@@ -87,7 +93,21 @@ def my_view(request):
         'auth': auth,
     }
 
+@view_config(route_name='login1', renderer='../templates/authorization.jinja2')
+@view_config(route_name='logout', renderer='../templates/authorization.jinja2')
+@view_config(route_name='authorization', renderer='../templates/authorization.jinja2')
+def test(request):
+    if 'login' in request.POST and 'password' in request.POST:
+        user = login(
+            request.POST["login"], request.POST["password"]
+        )
+        headers = remember(request, user.login)
+        # reques.route_name
+        return HTTPFound(location=request.route_url('Herzeleid', name=user.login),
+                         headers=headers)
 
+        print(request.POST["login"], request.POST["password"])
+    return {}
 
 def get_current_user(request):
     id_ = authenticated_userid(request)
