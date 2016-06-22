@@ -20,21 +20,26 @@ def almub_view(request):
             'came_from': res1,
             }
 
-@view_config(route_name='artists2', renderer='../templates/Christian_Lorenz.jinja2')
+@view_config(route_name='Christian_Lorenz', renderer='../templates/Christian_Lorenz.jinja2')
 @view_config(route_name='about', renderer='../templates/about.jinja2')
-@view_config(route_name='artists1', renderer='../templates/Till_Lindemann.jinja2')
-@view_config(route_name='artists3', renderer='../templates/Christoph_Doom_Schneider.jinja2')
-@view_config(route_name='artists4', renderer='../templates/Oliver_Riedel.jinja2')
-@view_config(route_name='artists5', renderer='../templates/Paul_Landers.jinja2')
-@view_config(route_name='artists6', renderer='../templates/Richard_Kruspe-Bernstein.jinja2')
+@view_config(route_name='Till_Lindemann', renderer='../templates/Till_Lindemann.jinja2')
+@view_config(route_name='Christoph_Doom_Schneider', renderer='../templates/Christoph_Doom_Schneider.jinja2')
+@view_config(route_name='Oliver_Riedel', renderer='../templates/Oliver_Riedel.jinja2')
+@view_config(route_name='Paul_Landers', renderer='../templates/Paul_Landers.jinja2')
+@view_config(route_name='Richard_Kruspe-Bernstein', renderer='../templates/Richard_Kruspe-Bernstein.jinja2')
 @view_config(route_name='test2', renderer='../templates/test2.shtml')
 @view_config(route_name='test3', renderer='../templates/test3.jinja2')
 @view_config(route_name='home', renderer='../templates/home.jinja2')
 def view_about(request):
+    username = request.authenticated_userid
     #file = open(os.getcwd(), 'r')
     res = str(request).split('\n')[0].split(' ')[1]
     res1 = res[1:]
-    return {'came_from': res1}
+    if username:
+        human = username
+    else: human = "Гость"
+    return {'came_from': res1,
+            'human':human}
 
 
 
@@ -97,16 +102,27 @@ def my_view(request):
 @view_config(route_name='logout', renderer='../templates/authorization.jinja2')
 @view_config(route_name='authorization', renderer='../templates/authorization.jinja2')
 def test(request):
+    res = str(request).split('\n')[0].split(' ')[1]
+    came_from = res[1:]
+    print(request.authenticated_userid)
+    print(request.POST)
     if 'login' in request.POST and 'password' in request.POST:
         user = login(
             request.POST["login"], request.POST["password"]
         )
-        headers = remember(request, user.login)
-        # reques.route_name
-        return HTTPFound(location=request.route_url('Herzeleid', name=user.login),
+        if user:
+            headers = remember(request, user.login)
+            # reques.route_name
+            return HTTPFound(location=request.route_url(request.POST["came_from"], name=user.login),
                          headers=headers)
 
         print(request.POST["login"], request.POST["password"])
+    if 'form.submitted' in request.POST and request.POST["form.submitted"] == "LogOut":
+        print (request.POST["form.submitted"])
+        headers = forget(request)
+        return HTTPFound(location=request.route_url('about', name='log out!!!'),
+                         headers=headers)
+
     return {}
 
 def get_current_user(request):
